@@ -16,7 +16,6 @@ class CreateMinistrosTable extends Migration
         Schema::create('ministros', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('ministerio_id')->unsigned();
-            $table->integer('mandato_id')->unsigned();
             $table->timestamps();
         });
     }

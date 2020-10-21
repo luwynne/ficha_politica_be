@@ -15,8 +15,7 @@ class CreateDeputadosEstaduaisTable extends Migration
     {
         Schema::create('deputados_estaduais', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('mandato_id')->unsigned();;
-            $table->integer('estado_id')->unsigned();;
+            $table->integer('estado_id')->unsigned();
             $table->timestamps();
         });
     }

@@ -15,7 +15,6 @@ class CreatePrefeitosTable extends Migration
     {
         Schema::create('prefeitos', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('mandato_id')->unsigned();
             $table->integer('cidade_id')->unsigned();
             $table->timestamps();
         });

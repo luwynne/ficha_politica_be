@@ -15,8 +15,7 @@ class CreateGovernadoresTable extends Migration
     {
         Schema::create('governadores', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('mandato_id')->unsigned();;
-            $table->integer('estado_id')->unsigned();;
+            $table->integer('estado_id')->unsigned();
             $table->timestamps();
         });
     }
