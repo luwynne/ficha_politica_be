@@ -2,7 +2,14 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\UserController;
+use App\Http\Controllers\{
+    UserController
+};
+
+use App\Http\Middleware\{
+    AuthMiddleware
+};
+
 
 /*
 |--------------------------------------------------------------------------
@@ -15,12 +22,37 @@ use App\Http\Controllers\UserController;
 |
 
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
+
+Route::group(['prefix' => 'user','namespace' => 'User'
+],function(){
+    Route::post('/register', [UserController::class, 'register']);
+    Route::post('/login', [UserController::class, 'login']);
+    Route::post('/logout', [UserController::class, 'logout']);
 });
+
+Route::group(['middleware' => ['auth:users']], function () {
+    
+    Route::get('/get_users', [UserController::class, 'getUsers']);
+});
+
 */
 
+Route::group(['prefix' => 'auth'], function ($router) {
+    Route::post('/register', [UserController::class, 'register']);
+    Route::post('/login', [UserController::class, 'login']);
+});
 
-Route::get('/get_users', [UserController::class, 'getUsers']);
+
+
+Route::group(['middleware' => 'auth:api'], function ($router) {
+
+    Route::group(['prefix' => 'auth'], function ($router) {
+        Route::post('/logout', [UserController::class, 'logout']);
+        Route::get('/logged_user', [UserController::class, 'loggedUser']);
+    });
+
+    
+
+});
 
 
