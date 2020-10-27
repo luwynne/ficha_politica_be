@@ -9,6 +9,13 @@ class Cidade extends Model{
 
     use HasFactory;
 
+    protected $fillable = [
+        'nome',
+        'estado_id'
+    ];
+
+    public $timestamps = false;
+
     public function estado(){
         return $this->belongsTo(Estado::class, 'estado_id');
     }
