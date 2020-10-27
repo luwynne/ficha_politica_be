@@ -8,5 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Ministerio extends Model{
 
     use HasFactory;
+
+    protected $table = 'ministerios';
     
 }

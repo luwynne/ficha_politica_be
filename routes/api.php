@@ -3,7 +3,8 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\{
-    UserController
+    PoliticoController,
+    UserController,
 };
 
 use App\Http\Middleware\{
@@ -51,7 +52,8 @@ Route::group(['middleware' => 'auth:api'], function ($router) {
         Route::get('/logged_user', [UserController::class, 'loggedUser']);
     });
 
-    
+    // Politicos
+    Route::get('/politico/search', [PoliticoController::class, 'searchPoliticos']);
 
 });
 

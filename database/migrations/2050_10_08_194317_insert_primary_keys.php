@@ -9,6 +9,10 @@ class InsertPrimaryKeys extends Migration
     
     public function up(){
 
+        Schema::table('partidos', function (Blueprint $table) {
+            $table->foreign('espectro_politico_id')->references('id')->on('espectros_politicos');
+        });
+
         Schema::table('cidades', function (Blueprint $table) {
             $table->foreign('estado_id')->references('id')->on('estados');
         });

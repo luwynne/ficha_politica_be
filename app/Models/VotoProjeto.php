@@ -9,6 +9,8 @@ class VotoProjeto extends Model{
 
     use HasFactory;
 
+    protected $table = 'votos_projetos';
+
     public function projeto(){
         return $this->belongsTo(Projeto::class, 'projeto_id');
     }

@@ -9,8 +9,14 @@ class Governador extends Model{
     
     use HasFactory;
 
+    protected $table = 'governadores';
+
     public function estado(){
         return $this->belongsTo(Estado::class, 'estado_id');
+    }
+
+    public function cargoString(){
+        return 'Governador - '.$this->estado->nome;
     }
 
 }

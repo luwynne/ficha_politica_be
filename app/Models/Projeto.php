@@ -9,6 +9,8 @@ class Projeto extends Model{
 
     use HasFactory;
 
+    protected $table = 'projetos';
+
     public function tipo(){
         return $this->belongsTo(TipoProjeto::class, 'tipo_id');
     }

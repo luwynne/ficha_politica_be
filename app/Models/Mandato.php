@@ -9,6 +9,8 @@ class Mandato extends Model{
 
     use HasFactory;
 
+    protected $table = 'mandatos';
+
     public function politicable(){
         return $this->morphTo();
     }

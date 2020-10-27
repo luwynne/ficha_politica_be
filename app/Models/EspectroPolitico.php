@@ -5,10 +5,9 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Partido extends Model{
-
+class EspectroPolitico extends Model
+{
     use HasFactory;
 
-    protected $table = 'partidos';
-    
+    protected $table = 'espectros_politicos';
 }

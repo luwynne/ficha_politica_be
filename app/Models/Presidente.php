@@ -8,5 +8,11 @@ use Illuminate\Database\Eloquent\Model;
 class Presidente extends Model{
 
     use HasFactory;
+
+    protected $table = 'presidentes';
+
+    public function cargoString(){
+        return 'Presidente da Republica';
+    }
     
 }

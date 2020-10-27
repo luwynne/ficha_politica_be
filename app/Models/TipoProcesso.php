@@ -8,5 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class TipoProcesso extends Model{
 
     use HasFactory;
+
+    protected $table = 'tipos_processos';
     
 }

@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreatePartidosTable extends Migration
+class CreateEspectrosPoliticosTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,9 @@ class CreatePartidosTable extends Migration
      */
     public function up()
     {
-        Schema::create('partidos', function (Blueprint $table) {
+        Schema::create('espectros_politicos', function (Blueprint $table) {
             $table->increments('id');
             $table->string('nome');
-            $table->string('sigla');
-            $table->integer('legenda')->nullable();
-            $table->integer('espectro_politico_id')->unsigned();
         });
     }
 
@@ -29,6 +26,6 @@ class CreatePartidosTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('partidos');
+        Schema::dropIfExists('espectros_politicos');
     }
 }

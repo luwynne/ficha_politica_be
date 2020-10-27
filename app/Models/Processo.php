@@ -9,6 +9,8 @@ class Processo extends Model{
 
     use HasFactory;
 
+    protected $table = 'processos';
+
     public function tipo(){
         return $this->belongsTo(TipoProcesso::class, 'tipo_id');
     }
