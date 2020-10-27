@@ -38,6 +38,9 @@ Route::group(['middleware' => ['auth:users']], function () {
 
 */
 
+// Politicos
+Route::get('/politico/search', [PoliticoController::class, 'searchPoliticos']);
+
 Route::group(['prefix' => 'auth'], function ($router) {
     Route::post('/register', [UserController::class, 'register']);
     Route::post('/login', [UserController::class, 'login']);
@@ -51,9 +54,6 @@ Route::group(['middleware' => 'auth:api'], function ($router) {
         Route::post('/logout', [UserController::class, 'logout']);
         Route::get('/logged_user', [UserController::class, 'loggedUser']);
     });
-
-    // Politicos
-    Route::get('/politico/search', [PoliticoController::class, 'searchPoliticos']);
 
 });
 

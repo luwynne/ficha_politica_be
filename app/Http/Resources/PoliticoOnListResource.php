@@ -22,8 +22,9 @@ class PoliticoOnListResource extends JsonResource
         $atual_mandato = $politico->mandatos()->orderBy('ano_inicio','DESC')->first();
 
         return [
+            'id' => $politico->id,
             'nome' => $politico->nome,
-            'atual_mandato' => $atual_mandato ? [
+            'ultimo_mandato' => $atual_mandato ? [
                 'cargo' => $atual_mandato->politicable->cargoString(),
                 'ano_inicio' => $atual_mandato->ano_inicio,
                 'ano_fim' => $atual_mandato->ano_fim,
