@@ -23,7 +23,8 @@ class PoliticoResource extends JsonResource
         return [
             'id' => $politico->id,
             'nome' => $politico->nome,
-            'data_nscimento' => $politico->data_nascimento,
+            'data_nascimento' => $politico->data_nascimento,
+            "descricao" => $politico->descricao,
             'mandatos' => new MandatosResource($politico->mandatos),
         ];
     }

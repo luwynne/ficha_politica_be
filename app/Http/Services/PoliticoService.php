@@ -53,6 +53,7 @@ class PoliticoService{
         }
 
         $politico->nome = $request->input('nome');
+        $politico->descricao = $request->input('descricao');
         $politico->data_nascimento = $request->input('data_nascimento');
         $politico->aprovado = false;
         $politico->save();
