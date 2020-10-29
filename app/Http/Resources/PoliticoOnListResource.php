@@ -24,12 +24,7 @@ class PoliticoOnListResource extends JsonResource
         return [
             'id' => $politico->id,
             'nome' => $politico->nome,
-            'ultimo_mandato' => $atual_mandato ? [
-                'cargo' => $atual_mandato->politicable->cargoString(),
-                'ano_inicio' => $atual_mandato->ano_inicio,
-                'ano_fim' => $atual_mandato->ano_fim,
-                'partido' => $atual_mandato->partido->sigla
-            ] : null
+            'ultimo_mandato' => new MandatoResource($atual_mandato)
         ];
 
     }

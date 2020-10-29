@@ -55,6 +55,11 @@ Route::group(['middleware' => 'auth:api'], function ($router) {
         Route::get('/logged_user', [UserController::class, 'loggedUser']);
     });
 
+    Route::group(['prefix' => 'politico'], function ($router) {
+        Route::post('/create', [PoliticoController::class, 'createPolitico']);
+        Route::patch('/{politico}/edit', [PoliticoController::class, 'editPolitico']);
+    });
+
 });
 
 

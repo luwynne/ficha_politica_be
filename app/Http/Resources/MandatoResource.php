@@ -4,7 +4,7 @@ namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class PoliticoResource extends JsonResource
+class MandatoResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -18,13 +18,13 @@ class PoliticoResource extends JsonResource
             return;
         }
 
-        $politico = $this->resource;
+        $mandato = $this->resource;
 
-        return [
-            'id' => $politico->id,
-            'nome' => $politico->nome,
-            'data_nscimento' => $politico->data_nascimento,
-            'mandatos' => new MandatosResource($politico->mandatos),
+        return[
+            'cargo' => $mandato->politicable->cargoString(),
+            'ano_inicio' => $mandato->ano_inicio,
+            'ano_fim' => $mandato->ano_fim,
+            'partido' => $mandato->partido->sigla
         ];
     }
 }
