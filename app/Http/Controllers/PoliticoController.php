@@ -10,6 +10,7 @@ use App\Models\{
 
 use App\Http\Requests\{
     CreateEditPoliticoRequest,
+    DeletePoliticoRequest,
     GetPoliticoRequest
 };
 
@@ -29,6 +30,10 @@ class PoliticoController extends Controller{
         $this->politico_service = new PoliticoService();
     }
 
+    public function getPolitico(Politico $politico){
+        return response()->json(new PoliticoResource($politico));
+    }
+    
     public function searchPoliticos(GetPoliticoRequest $request){
         $politicos = $this->politico_service->searchPoliticos($request);
         return response()->json((new PoliticosResource($politicos))->resolve(['is_list' => true]));
@@ -45,6 +50,11 @@ class PoliticoController extends Controller{
     public function editPolitico(Politico $politico, CreateEditPoliticoRequest $request){
         $politico = $this->politico_service->saveEditPolitico($request, $politico->id);
         return response()->json(new PoliticoResource($politico));
+    }
+
+    public function deletePolitico(Politico $politico, DeletePoliticoRequest $request){
+        $this->politico_service->deletePolitico($politico);
+        return response()->json();
     }
     
 }

@@ -68,14 +68,7 @@ class PoliticoService{
 
     private function _saveMandatos($mandatos, $politico){
 
-        // Deleting the mandatos in order to recreate the ones comming from the payload
-        if($politico->mandatos->count() > 0){
-            $politico->mandatos->each(function($mandato){
-                $politicable = $mandato->politicable;
-                $mandato->delete();
-                $politicable->delete();
-            });
-        }
+        $this->_deleteMandatosPoliticable($politico);
 
         $mandatos = collect($mandatos);
 
@@ -93,6 +86,8 @@ class PoliticoService{
             $mandato_obj->ano_fim = $mandato['ano_fim'];
             $mandato_obj->save();
         });
+
+        return true;
     }
 
     
@@ -111,6 +106,24 @@ class PoliticoService{
         $politicable_object->save();
 
         return $politicable_object;
+    }
+    
+    public function deletePolitico($politico){
+        $this->_deleteMandatosPoliticable($politico);
+        $politico->delete();
+        return true;
+    }
+
+
+    private function _deleteMandatosPoliticable($politico){
+        if($politico->mandatos->count() > 0){
+            $politico->mandatos->each(function($mandato){
+                $politicable = $mandato->politicable;
+                $mandato->delete();
+                $politicable->delete();
+            });
+        }
+        return true;
     }
 
 }
