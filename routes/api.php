@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\{
     PoliticoController,
+    ProcessoController,
     UserController,
 };
 
@@ -60,6 +61,11 @@ Route::group(['middleware' => 'auth:api'], function ($router) {
         Route::post('/create', [PoliticoController::class, 'createPolitico']);
         Route::patch('/{politico}/edit', [PoliticoController::class, 'editPolitico']);
         Route::delete('/{politico}/delete', [PoliticoController::class, 'deletePolitico']);
+    });
+
+    Route::group(['prefix' => 'processo'], function ($router) {
+        Route::post('/create', [ProcessoController::class, 'createProcesso']);
+        Route::patch('/{processo}/edit', [ProcessoController::class, 'editProcesso']);
     });
 
 });

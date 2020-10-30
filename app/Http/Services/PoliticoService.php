@@ -37,19 +37,11 @@ class PoliticoService{
 
     
     public function saveEditPolitico($request, $politico_id){
-
-        $politico = Politico::find($politico_id);
         
         if($politico_id == null){
             $politico = new Politico();
-            $existing_politico = Politico::where('nome', $request->input('nome'))->first();
         }else{
             $politico = Politico::find($politico_id);
-            $existing_politico = null;
-        }
-
-        if(!$existing_politico == null){
-            return null;
         }
 
         $politico->nome = $request->input('nome');

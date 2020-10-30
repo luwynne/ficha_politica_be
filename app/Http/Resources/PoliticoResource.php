@@ -6,26 +6,37 @@ use Illuminate\Http\Resources\Json\JsonResource;
 
 class PoliticoResource extends JsonResource
 {
-    /**
-     * Transform the resource into an array.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return array
-     */
+    
+    public $light;
+    public $object; 
+
+    public function _construct($object = null, $light = false){
+        $this->light = $light;
+        $this->object = $object;
+    }
+
     public function toArray($request){
 
         if ($this->resource == null) {
-            return;
+            if($this->object == null){
+                return;
+            }
+            $politico = $this->object;
+        }else{
+            $politico = $this->resource;
         }
 
-        $politico = $this->resource;
-
-        return [
+        $return_array = [
             'id' => $politico->id,
             'nome' => $politico->nome,
             'data_nascimento' => $politico->data_nascimento,
             "descricao" => $politico->descricao,
-            'mandatos' => new MandatosResource($politico->mandatos),
         ];
+
+        if($this->light == false){
+            $return_array = array_merge($return_array, ['mandatos' => new MandatosResource($politico->mandatos)]);
+        }
+
+        return $return_array;
     }
 }

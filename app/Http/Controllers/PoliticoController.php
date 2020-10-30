@@ -9,8 +9,9 @@ use App\Models\{
 };
 
 use App\Http\Requests\{
-    CreateEditPoliticoRequest,
+    CreatPoliticoRequest,
     DeletePoliticoRequest,
+    EditPoliticoRequest,
     GetPoliticoRequest
 };
 
@@ -39,15 +40,12 @@ class PoliticoController extends Controller{
         return response()->json((new PoliticosResource($politicos))->resolve(['is_list' => true]));
     }
 
-    public function createPolitico(CreateEditPoliticoRequest $request){
-        $new_politico = $this->politico_service->saveEditPolitico($request, null);
-        if($new_politico == null){
-            return response()->json(["message" => "Politico ja cadastrado"], 403);
-        }
-        return response()->json(new PoliticoResource($new_politico));
+    public function createPolitico(CreatPoliticoRequest $request){
+        $politico = $this->politico_service->saveEditPolitico($request, null);
+        return response()->json(new PoliticoResource($politico));
     }
 
-    public function editPolitico(Politico $politico, CreateEditPoliticoRequest $request){
+    public function editPolitico(Politico $politico, EditPoliticoRequest $request){
         $politico = $this->politico_service->saveEditPolitico($request, $politico->id);
         return response()->json(new PoliticoResource($politico));
     }

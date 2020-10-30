@@ -72,6 +72,7 @@ class InsertPrimaryKeys extends Migration
         Schema::table('processos', function (Blueprint $table) {
             $table->foreign('mandato_id')->references('id')->on('mandatos');
             $table->foreign('tipo_id')->references('id')->on('tipos_processos');
+            $table->foreign('politico_id')->references('id')->on('politicos');
         });
         
     }

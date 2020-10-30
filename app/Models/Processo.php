@@ -19,4 +19,8 @@ class Processo extends Model{
         return $this->belongsTo(Mandato::class, 'mandato_id');
     }
 
+    public function relator(){
+        return $this->belongsTo(Politico::class, 'politico_id');
+    }
+
 }

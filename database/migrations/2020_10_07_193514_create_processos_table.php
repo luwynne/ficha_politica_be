@@ -17,10 +17,12 @@ class CreateProcessosTable extends Migration
             $table->increments('id');
             $table->string('nome');
             $table->string('descricao');
+            $table->string('protocolo');
             $table->boolean('finalizado');
             $table->boolean('culpado');
             $table->integer('mandato_id')->unsigned();
             $table->integer('tipo_id')->unsigned();
+            $table->integer('politico_id')->unsigned(); // relator do processo
             $table->timestamps();
         });
     }

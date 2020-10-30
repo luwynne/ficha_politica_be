@@ -5,7 +5,7 @@ namespace App\Http\Requests;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
-class CreateEditPoliticoRequest extends FormRequest
+class CreatPoliticoRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -30,7 +30,8 @@ class CreateEditPoliticoRequest extends FormRequest
         $rules_array = [
             'nome'=>[
                 'required',
-                'string'
+                'string',
+                'unique:politicos,nome'
             ],
             'data_nascimento' =>[
                 'nullable',
