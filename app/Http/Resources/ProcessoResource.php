@@ -19,16 +19,17 @@ class ProcessoResource extends JsonResource
         }
 
         $processo = $this->resource;
+        $show_mandato_politicable = isset($request['show_mandato_politicable']) && $request['show_mandato_politicable'] == true;
         
         return [
             'id' => $processo->id,
             'nome' => $processo->nome,
             'descricao' => $processo->descricao,
             'protocolo' => $processo->protocolo,
-            'finalizado' => $processo->finalizado,
-            'culpado' => $processo->culpado,
+            'finalizado' => (boolean)$processo->finalizado,
+            'culpado' => (boolean)$processo->culpado,
             'tipo' => new TipoProcessoResource($processo->tipo),
-            'mandato' => new MandatoResource($processo->mandato),
+            'mandato' => $show_mandato_politicable ? (new MandatoResource($processo->mandato))->resolve(['show_mandato_politicable' => true]) : new MandatoResource($processo->mandato),
             'relator' => new PoliticoResource($processo->relator, true)
         ];
     }

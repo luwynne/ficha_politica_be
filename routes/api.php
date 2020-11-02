@@ -41,6 +41,7 @@ Route::group(['middleware' => ['auth:users']], function () {
 
 // Politicos
 Route::get('/politico/search', [PoliticoController::class, 'searchPoliticos']);
+Route::get('/processo/search', [ProcessoController::class, 'searchProcessess']);
 
 Route::group(['prefix' => 'auth'], function ($router) {
     Route::post('/register', [UserController::class, 'register']);
@@ -64,8 +65,10 @@ Route::group(['middleware' => 'auth:api'], function ($router) {
     });
 
     Route::group(['prefix' => 'processo'], function ($router) {
+        Route::get('/{processo}/get', [ProcessoController::class, 'getProcesso']);
         Route::post('/create', [ProcessoController::class, 'createProcesso']);
         Route::patch('/{processo}/edit', [ProcessoController::class, 'editProcesso']);
+        Route::delete('/{processo}/delete', [ProcessoController::class, 'deleteProcesso']);
     });
 
 });

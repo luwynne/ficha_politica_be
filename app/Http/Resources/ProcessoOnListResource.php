@@ -12,8 +12,18 @@ class ProcessoOnListResource extends JsonResource
      * @param  \Illuminate\Http\Request  $request
      * @return array
      */
-    public function toArray($request)
-    {
-        return parent::toArray($request);
+    public function toArray($request){
+
+        if ($this->resource == null) {
+            return;
+        }
+
+        $process = $this->resource;
+
+        return [
+            'id' => $process->id,
+            'nome' => $process->nome,
+            'protocolo' => $process->protocolo
+        ];
     }
 }

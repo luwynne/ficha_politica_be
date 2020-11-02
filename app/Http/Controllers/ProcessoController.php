@@ -9,7 +9,9 @@ use App\Models\Processo;
 
 use App\Http\Requests\{
     CreateProcessoRequest,
-    EditProcessoRequest
+    DeleteProcessoRequest,
+    EditProcessoRequest,
+    GetProcessRequest
 };
 
 use App\Http\Resources\{
@@ -26,6 +28,15 @@ class ProcessoController extends Controller{
         $this->processo_service = new ProcessoService();
     }
 
+    public function getProcesso(Processo $processo){
+        return response()->json((new ProcessoResource($processo))->resolve(['show_mandato_politicable' => true]));
+    }
+
+    public function searchProcessess(GetProcessRequest $request){
+        $processos = $this->processo_service->searchProcessess($request);
+        return response()->json((new ProcessosResource($processos))->resolve(['is_list' => true]));
+    }
+
     public function createProcesso(CreateProcessoRequest $request){
         $processo = $this->processo_service->saveEditProcesso($request, null);
         return response()->json(new ProcessoResource($processo));
@@ -34,6 +45,11 @@ class ProcessoController extends Controller{
     public function editProcesso(Processo $processo, EditProcessoRequest $request){
         $processo = $this->processo_service->saveEditProcesso($request, $processo->id);
         return response()->json(new ProcessoResource($processo));
+    }
+
+    public function deleteProcesso(DeleteProcessoRequest $request, Processo $processo){
+        $this->processo_service->deleteProcesso($processo);
+        return response()->json();
     }
     
 }

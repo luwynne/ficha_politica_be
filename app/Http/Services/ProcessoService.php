@@ -6,6 +6,26 @@ use App\Models\Processo;
 
 class ProcessoService{
 
+    public function searchProcessess($request){
+        $data = json_decode(json_encode($request->all()));
+        $param = optional($data)->param;
+        
+        $processos = Processo::where(function($q) use($param){
+            $q->where('nome', 'like', '%'.$param.'%')
+              ->orWhere('protocolo', 'like', '%'.$param.'%')
+              ->orWhereHas('mandato', function($q) use($param){
+                  $q->whereHas('politico', function($q) use($param){
+                      $q->where('nome', 'like', '%'.$param.'%');
+                  });
+              })
+              ->orWhereHas('relator', function($q) use($param){
+                 $q->where('nome', 'like', '%'.$param.'%');
+              });
+        })->orderBy('nome', 'ASC')->get();
+
+        return $processos;
+    }
+
     public function saveEditProcesso($request, $processo_id){
         
         if($processo_id == null){
@@ -28,6 +48,11 @@ class ProcessoService{
 
         return $processo;
 
+    }
+
+    public function deleteProcesso($processo){
+        $processo->delete();
+        return true;
     }
 
 }

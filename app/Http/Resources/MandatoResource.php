@@ -6,25 +6,27 @@ use Illuminate\Http\Resources\Json\JsonResource;
 
 class MandatoResource extends JsonResource
 {
-    /**
-     * Transform the resource into an array.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return array
-     */
-    public function toArray($request){
 
+    public function toArray($request){
+        
         if ($this->resource == null) {
             return;
         }
 
         $mandato = $this->resource;
 
-        return[
+        $return_array = [
+            'id' => $mandato->id,
             'cargo' => $mandato->politicable->cargoString(),
             'ano_inicio' => $mandato->ano_inicio,
             'ano_fim' => $mandato->ano_fim,
             'partido' => $mandato->partido->sigla
         ];
+
+        if(isset($request['show_mandato_politicable']) && $request['show_mandato_politicable'] == true){
+            $return_array = array_merge($return_array, ['nome' => $mandato->politico->nome]);
+        }
+
+        return $return_array;
     }
 }
