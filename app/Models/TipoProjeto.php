@@ -9,6 +9,6 @@ class TipoProjeto extends Model{
 
     use HasFactory;
 
-    protected $table = 'tipos_projetos';
+    protected $table = 'tipo_projetos';
     
 }

@@ -17,9 +17,11 @@ class CreateProjetosTable extends Migration
             $table->increments('id');
             $table->string('nome');
             $table->text('descricao');
+            $table->string('protocolo');
             $table->integer('tipo_id')->unsigned();
             $table->integer('mandato_id')->unsigned();
             $table->boolean('aprovado');
+            $table->text('url')->nullable();
             $table->timestamps();
         });
     }

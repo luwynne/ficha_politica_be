@@ -20,6 +20,7 @@ class CreateProcessosTable extends Migration
             $table->string('protocolo');
             $table->boolean('finalizado');
             $table->boolean('culpado');
+            $table->text('url')->nullable();
             $table->integer('mandato_id')->unsigned();
             $table->integer('tipo_id')->unsigned();
             $table->integer('politico_id')->unsigned(); // relator do processo
