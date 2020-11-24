@@ -2,7 +2,11 @@
 
 namespace App\Http\Services;
 
-use App\Models\Projeto;
+use App\Models\{
+    Mandato,
+    Projeto,
+    VotoProjeto
+};
 
 class ProjetoService{
 
@@ -25,6 +29,28 @@ class ProjetoService{
 
         return $projeto;
 
+    }
+
+    public function deleteProjeto($projeto){
+        $projeto->votos->each(function($voto){
+            $voto->delete();
+        });
+        $projeto->delete();
+        return true;
+    }
+
+    public function assignVoteProjeto($projeto, $request){
+        $voto_projeto = new VotoProjeto();
+        $voto_projeto->projeto_id = $projeto->id;
+        $voto_projeto->mandato_id = $request->input('mandato_id');
+        $voto_projeto->aprova = $request->input('aprova');
+        $voto_projeto->save();
+        return true;
+    }
+
+    public function deleteVoteProjeto($voto_projeto){
+        $voto_projeto->delete();
+        return true;
     }
 
 }

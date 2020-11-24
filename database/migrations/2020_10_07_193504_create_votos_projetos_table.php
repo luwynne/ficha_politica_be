@@ -17,6 +17,7 @@ class CreateVotosProjetosTable extends Migration
             $table->increments('id');
             $table->integer('projeto_id')->unsigned();
             $table->integer('mandato_id')->unsigned();
+            $table->boolean('aprova');
             $table->timestamps();
         });
     }

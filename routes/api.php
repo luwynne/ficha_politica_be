@@ -75,7 +75,12 @@ Route::group(['middleware' => 'auth:api'], function ($router) {
     Route::group(['prefix' => 'projeto'], function ($router) {
         Route::post('/create', [ProjetoController::class, 'createProjeto']);
         Route::patch('/{projeto}/edit', [ProjetoController::class, 'editProjeto']);
-        
+        Route::post('/{projeto}/vote', [ProjetoController::class, 'assignVoteProjeto']);
+        Route::delete('/{projeto}/delete', [ProjetoController::class, 'deleteProjeto']);
+    });
+
+    Route::group(['prefix' => 'voto_projeto'], function ($router) {
+        Route::delete('/{voto_projeto}/delete', [ProjetoController::class, 'deleteVotoProjeto']);
     });
 
 });

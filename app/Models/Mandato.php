@@ -22,4 +22,8 @@ class Mandato extends Model{
     public function partido(){
         return $this->belongsTo(Partido::class, 'partido_id');
     }
+
+    public function votos_projetos(){
+        return $this->hasMany(VotoProjeto::class, 'mandato_id');
+    }
 }

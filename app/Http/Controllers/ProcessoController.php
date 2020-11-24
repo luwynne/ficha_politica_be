@@ -39,12 +39,12 @@ class ProcessoController extends Controller{
 
     public function createProcesso(CreateProcessoRequest $request){
         $processo = $this->processo_service->saveEditProcesso($request, null);
-        return response()->json(new ProcessoResource($processo));
+        return response()->json((new ProcessoResource($processo))->resolve(['show_mandato_politicable' => true]));
     }
 
     public function editProcesso(Processo $processo, EditProcessoRequest $request){
         $processo = $this->processo_service->saveEditProcesso($request, $processo->id);
-        return response()->json(new ProcessoResource($processo));
+        return response()->json((new ProcessoResource($processo))->resolve(['show_mandato_politicable' => true]));
     }
 
     public function deleteProcesso(DeleteProcessoRequest $request, Processo $processo){
