@@ -16,6 +16,8 @@ use App\Models\{
     Presidente
 };
 
+use Image;
+
 class PoliticoService{
 
     
@@ -48,12 +50,27 @@ class PoliticoService{
         $politico->descricao = $request->input('descricao');
         $politico->data_nascimento = $request->input('data_nascimento');
         $politico->aprovado = false;
-        $politico->save();
 
         if(!empty($request->input('mandatos'))){
             $this->_saveMandatos($request->input('mandatos'), $politico);
         }
 
+        if($request->get('image')){
+
+            if($politico->image){
+                $destinationpath = public_path('img/politicos/');
+                $file_path = $destinationpath.$politico->image;
+                unlink($file_path);
+            }
+
+            $image = $request->get('image');
+            $name = time().'.' . explode('/', explode(':', substr($image, 0, strpos($image, ';')))[1])[1];
+            Image::make($request->get('image'))->save(public_path('img/politicos/').$name);
+
+            $politico->image = $name;
+        }
+
+        $politico->save();
         $politico->refresh();
         return $politico;
     }
