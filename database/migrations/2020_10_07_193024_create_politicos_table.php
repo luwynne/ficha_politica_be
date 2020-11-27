@@ -18,6 +18,8 @@ class CreatePoliticosTable extends Migration
             $table->string('nome');
             $table->text('descricao')->nullable();
             $table->string('data_nascimento')->nullable();
+            $table->boolean('aprovado')->default(0);
+            $table->string('image')->nullable();
             $table->timestamps();
         });
     }
