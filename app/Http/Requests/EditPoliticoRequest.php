@@ -58,6 +58,9 @@ class EditPoliticoRequest extends FormRequest
                 'nullable',
                 'string'
             ],
+            'image' =>[
+                'nullable'
+            ]
         ];
 
         $mandatos->each(function ($mandato, $key) use (&$rules_array) {

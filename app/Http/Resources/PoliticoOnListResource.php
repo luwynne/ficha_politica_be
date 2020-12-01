@@ -24,6 +24,7 @@ class PoliticoOnListResource extends JsonResource
         return [
             'id' => $politico->id,
             'nome' => $politico->nome,
+            'image' => $politico->image,
             'ultimo_mandato' => new MandatoResource($atual_mandato)
         ];
 

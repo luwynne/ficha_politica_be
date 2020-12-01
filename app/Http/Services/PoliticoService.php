@@ -29,7 +29,7 @@ class PoliticoService{
             $q->where('nome', 'like', '%'.$param.'%')
               ->orWhereHas('mandatos', function($q) use($param){
                   $q->whereHas('partido', function($q) use($param){
-                      $q->where('nome', 'like', '%'.$param.'%')->orWhere('sigla', $param);
+                      $q->where('nome', 'like', '%'.$param.'%')->orWhere('sigla', 'like', '%'.$param.'%');
                   })->orWhere('politicable_type', 'like', '%'.str_replace(' ', '', $param).'%');
               });
         })->where('aprovado', true)->orderBy('nome', 'ASC')->get();
@@ -42,6 +42,7 @@ class PoliticoService{
         
         if($politico_id == null){
             $politico = new Politico();
+            $politico->aprovado = false;
         }else{
             $politico = Politico::find($politico_id);
         }
@@ -49,7 +50,6 @@ class PoliticoService{
         $politico->nome = $request->input('nome');
         $politico->descricao = $request->input('descricao');
         $politico->data_nascimento = $request->input('data_nascimento');
-        $politico->aprovado = false;
 
         if(!empty($request->input('mandatos'))){
             $this->_saveMandatos($request->input('mandatos'), $politico);
