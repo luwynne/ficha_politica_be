@@ -20,7 +20,9 @@ class MandatoResource extends JsonResource
             'cargo' => $mandato->politicable->cargoString(),
             'ano_inicio' => $mandato->ano_inicio,
             'ano_fim' => $mandato->ano_fim,
-            'partido' => $mandato->partido->sigla
+            'partido' => $mandato->partido->sigla,
+            'projetos' => new ProjetosResource($mandato->projetos),
+            'processos' => $mandato->processos,
         ];
 
         if(isset($request['show_mandato_politicable']) && $request['show_mandato_politicable'] == true){

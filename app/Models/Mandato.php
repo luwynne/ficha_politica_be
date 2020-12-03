@@ -26,4 +26,12 @@ class Mandato extends Model{
     public function votos_projetos(){
         return $this->hasMany(VotoProjeto::class, 'mandato_id');
     }
+
+    public function projetos(){
+        return $this->hasMany(Projeto::class, 'mandato_id');
+    }
+
+    public function processsos(){
+        return $this->hasMany(Processo::class, 'mandato_id');
+    }
 }

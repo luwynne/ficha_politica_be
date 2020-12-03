@@ -26,11 +26,15 @@ class PoliticoResource extends JsonResource
             $politico = $this->resource;
         }
 
+        $atual_mandato = $politico->mandatos()->orderBy('ano_inicio','DESC')->first();
+
         $return_array = [
             'id' => $politico->id,
             'nome' => $politico->nome,
             'data_nascimento' => $politico->data_nascimento,
             "descricao" => $politico->descricao,
+            'image' => $politico->image,
+            'ultimo_mandato' => new MandatoResource($atual_mandato)
         ];
 
         if($this->light == false){

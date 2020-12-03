@@ -43,6 +43,9 @@ Route::group(['middleware' => ['auth:users']], function () {
 // Politicos
 Route::get('/politico/search', [PoliticoController::class, 'searchPoliticos']);
 Route::get('/processo/search', [ProcessoController::class, 'searchProcessess']);
+Route::get('/politico/{politico}/get', [PoliticoController::class, 'getPolitico']);
+Route::get('/projeto/{projeto}/get', [ProjetoController::class, 'getProjeto']);
+Route::get('/processo/{processo}/get', [ProcessoController::class, 'getProcesso']);
 
 Route::group(['prefix' => 'auth'], function ($router) {
     Route::post('/register', [UserController::class, 'register']);
@@ -59,14 +62,12 @@ Route::group(['middleware' => 'auth:api'], function ($router) {
     });
 
     Route::group(['prefix' => 'politico'], function ($router) {
-        Route::get('/{politico}/get', [PoliticoController::class, 'getPolitico']);
         Route::post('/create', [PoliticoController::class, 'createPolitico']);
         Route::patch('/{politico}/edit', [PoliticoController::class, 'editPolitico']);
         Route::delete('/{politico}/delete', [PoliticoController::class, 'deletePolitico']);
     });
 
     Route::group(['prefix' => 'processo'], function ($router) {
-        Route::get('/{processo}/get', [ProcessoController::class, 'getProcesso']);
         Route::post('/create', [ProcessoController::class, 'createProcesso']);
         Route::patch('/{processo}/edit', [ProcessoController::class, 'editProcesso']);
         Route::delete('/{processo}/delete', [ProcessoController::class, 'deleteProcesso']);
