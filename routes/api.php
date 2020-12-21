@@ -40,10 +40,10 @@ Route::group(['middleware' => ['auth:users']], function () {
 
 */
 
-// Politicos
 Route::get('/politico/search', [PoliticoController::class, 'searchPoliticos']);
 Route::get('/processo/search', [ProcessoController::class, 'searchProcessess']);
 Route::get('/politico/{politico}/get', [PoliticoController::class, 'getPolitico']);
+Route::get('/projeto/search', [ProjetoController::class, 'searchProjects']);
 Route::get('/projeto/{projeto}/get', [ProjetoController::class, 'getProjeto']);
 Route::get('/processo/{processo}/get', [ProcessoController::class, 'getProcesso']);
 

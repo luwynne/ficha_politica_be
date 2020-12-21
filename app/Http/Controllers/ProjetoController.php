@@ -33,6 +33,15 @@ class ProjetoController extends Controller{
         $this->projeto_service = new ProjetoService();
     }
 
+    public function searchProjects(Request $request){
+        $projetos = $this->projeto_service->searchProjects($request);
+        return response()->json((new ProjetosResource($projetos)));
+    }
+
+    public function getProjeto(Projeto $projeto){
+        return response()->json((new ProjetoResource($projeto))->resolve(['show_mandato_politicable' => true]));
+    }
+
     public function createProjeto(CreateEditProjetoRequest $request){
         $projeto = $this->projeto_service->saveEditProjeto($request, null);
         return response()->json((new ProjetoResource($projeto))->resolve(['show_mandato_politicable' => true]));

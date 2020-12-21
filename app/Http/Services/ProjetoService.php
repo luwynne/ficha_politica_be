@@ -10,6 +10,23 @@ use App\Models\{
 
 class ProjetoService{
 
+    public function searchProjects($request){
+        $data = json_decode(json_encode($request->all()));
+        $param = optional($data)->param;
+        
+        $processos = Projeto::where(function($q) use($param){
+            $q->where('nome', 'like', '%'.$param.'%')
+              ->orWhere('protocolo', 'like', '%'.$param.'%')
+              ->orWhereHas('mandato', function($q) use($param){
+                  $q->whereHas('politico', function($q) use($param){
+                      $q->where('nome', 'like', '%'.$param.'%');
+                  });
+              });
+        })->orderBy('nome', 'ASC')->get();
+
+        return $processos;
+    }
+
     public function saveEditProjeto($request, $projeto_id){
 
         if($projeto_id == null){
