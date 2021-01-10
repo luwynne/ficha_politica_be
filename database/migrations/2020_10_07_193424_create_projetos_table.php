@@ -20,7 +20,7 @@ class CreateProjetosTable extends Migration
             $table->string('protocolo');
             $table->integer('tipo_id')->unsigned();
             $table->integer('mandato_id')->unsigned();
-            $table->boolean('aprovado');
+            $table->boolean('aprovado')->nullable();
             $table->text('url')->nullable();
             $table->timestamps();
         });

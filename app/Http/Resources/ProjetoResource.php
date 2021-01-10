@@ -27,7 +27,7 @@ class ProjetoResource extends JsonResource
             'nome' => $projeto->nome,
             'descricao' => $projeto->descricao,
             'protocolo' => $projeto->protocolo,
-            'aprovado' => (boolean)$projeto->aprovado,
+            'aprovado' => $projeto->aprovado === null ? null : (boolean)$projeto->aprovado,
             'tipo' => new TipoProjetoResource($projeto->tipo),
             'relator' => $show_mandato_politicable ? (new MandatoResource($projeto->mandato))->resolve(['show_mandato_politicable' => true]) : null,
             'total_votos' => $projeto->votos->count()
