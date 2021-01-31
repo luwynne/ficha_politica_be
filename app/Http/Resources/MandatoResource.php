@@ -23,6 +23,7 @@ class MandatoResource extends JsonResource
             'partido' => $mandato->partido->sigla,
             'projetos' => new ProjetosResource($mandato->projetos),
             'processos' => $mandato->processos,
+            'politico_id' => $mandato->politico->id
         ];
 
         if(isset($request['show_mandato_politicable']) && $request['show_mandato_politicable'] == true){
