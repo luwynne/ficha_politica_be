@@ -24,8 +24,8 @@ class ProcessoController extends Controller{
 
     public $processo_service;
 
-    public function __construct(){
-        $this->processo_service = new ProcessoService();
+    public function __construct(ProcessoService $processo_service){
+        $this->processo_service = $processo_service;
     }
 
     public function getProcesso(Processo $processo){
