@@ -29,8 +29,8 @@ class ProjetoController extends Controller{
 
     public $projeto_service;
     
-    public function __construct(){
-        $this->projeto_service = new ProjetoService();
+    public function __construct(ProjetoService $projeto_service){
+        $this->projeto_service = $projeto_service;
     }
 
     public function searchProjects(Request $request){
