@@ -27,8 +27,8 @@ class PoliticoController extends Controller{
 
     public $politico_service;
 
-    public function __construct(){
-        $this->politico_service = new PoliticoService();
+    public function __construct(PoliticoService $politico_service){
+        $this->politico_service = $politico_service;
     }
 
     public function getPolitico(Politico $politico){
